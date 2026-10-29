@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#102b66" />
+  <meta name="description" content="Vishal Rajput and Hospitality billing workspace." />
+  <title>Vishal Rajput and Hospitality | Billing Desk</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar no-print">
+      <a class="brand" href="#" aria-label="Vishal Rajput and Hospitality">
+        <span class="brand-mark"><span>V</span><i>+</i></span>
+        <span class="brand-copy"><strong>VISHAL RAJPUT</strong><small>AND HOSPITALITY</small></span>
+      </a>
+      <div class="nav-caption">MAIN MENU</div>
+      <button class="nav-item active" type="button"><span class="nav-icon">▤</span><span>Create bill</span><span class="nav-arrow">›</span></button>
+      <div class="sidebar-note">
+        <span class="note-icon">✦</span>
+        <strong>Simple. Clear. Professional.</strong>
+        <p>Create a bill and print a neat receipt in a few clicks.</p>
+      </div>
+      <div class="sidebar-status"><span class="online-dot"></span><span><strong>Ready to use</strong><small>Local browser session</small></span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="page-header no-print">
+        <div class="header-copy">
+          <div class="breadcrumb">WORKSPACE <span>/</span> BILLING DESK</div>
+          <h1>Billing desk<span class="heading-dot">.</span></h1>
+          <p>Create, review and print a patient receipt.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-ghost" id="newBillBtn" type="button"><span>＋</span> New bill</button>
+          <button class="btn btn-primary" id="printBtn" type="button"><span class="print-icon">⎙</span> Print receipt <span class="button-arrow">↗</span></button>
+        </div>
+      </header>
+
+      <div class="workspace-label no-print"><span class="live-dot"></span> NEW RECEIPT <span class="label-divider">·</span> FILL IN THE DETAILS BELOW</div>
+
+      <section class="receipt-card" id="receipt">
+        <div class="receipt-topline"></div>
+        <header class="receipt-header">
+          <div class="hospital-brand">
+            <div class="hospital-symbol"><span>✚</span></div>
+            <div class="hospital-copy">
+              <p class="hospital-overline">YOUR HEALTH, OUR PRIORITY</p>
+              <h2>VISHAL RAJPUT <span>AND HOSPITALITY</span></h2>
+              <div class="hospital-contact">
+                <span><i class="contact-icon">⌖</i> Muzzaffarpur, Gopalpura - 454562</span>
+                <span><i class="contact-icon">☎</i> 9973257740</span>
+              </div>
+            </div>
+          </div>
+          <div class="receipt-badge"><span class="badge-symbol">▤</span><span><strong>MEDICAL BILL</strong><small>Customer receipt</small></span></div>
+        </header>
+
+        <div class="section-title">
+          <div class="section-number">01</div>
+          <div><h3>Patient details</h3><p>Enter the customer and billing information.</p></div>
+        </div>
+
+        <div class="patient-grid">
+          <label class="form-field field-patient"><span>Patient / customer name <b>*</b></span><input id="customer" type="text" placeholder="e.g. Rahul Kumar" autocomplete="name" /></label>
+          <label class="form-field"><span>Mobile number</span><input id="phone" type="tel" placeholder="10-digit mobile" inputmode="tel" /></label>
+          <label class="form-field"><span>Bill number</span><input id="billNo" type="text" readonly /></label>
+          <label class="form-field"><span>Bill date</span><input id="billDate" type="date" /></label>
+          <label class="form-field"><span>Doctor / prescribed by</span><input id="doctor" type="text" placeholder="Optional" /></label>
+          <label class="form-field"><span>Payment method</span><select id="payment"><option>Cash</option><option>UPI</option><option>Card</option><option>Credit</option></select></label>
+        </div>
+
+        <div class="section-title medicine-section-title">
+          <div class="section-number">02</div>
+          <div><h3>Medicine details</h3><p>Add items and their price to calculate the bill.</p></div>
+          <button class="btn btn-outline btn-small no-print" id="addMedicineBtn" type="button"><span>＋</span> Add medicine</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="medicine-table">
+            <thead><tr><th class="medicine-col">MEDICINE / ITEM</th><th>QTY</th><th>RATE (₹)</th><th>DISCOUNT (₹)</th><th class="right">AMOUNT (₹)</th><th class="no-print remove-col"></th></tr></thead>
+            <tbody id="items"></tbody>
+          </table>
+          <div class="empty-hint" id="emptyHint" hidden>No items added yet.</div>
+        </div>
+        <button class="add-row-link no-print" id="addMedicineLink" type="button">＋ Add another item</button>
+
+        <div class="billing-bottom">
+          <div class="notes-column">
+            <div class="section-title notes-title">
+              <div class="section-number">03</div>
+              <div><h3>Additional notes</h3><p>Optional instructions for this receipt.</p></div>
+            </div>
+            <label class="form-field"><span>Notes / instructions</span><textarea id="notes" rows="3" placeholder="Add a note if needed..."></textarea></label>
+            <label class="form-field tax-field no-print"><span>Tax / GST amount (₹)</span><input id="tax" type="number" min="0" step="0.01" value="0" /><small>Enter manually if applicable.</small></label>
+          </div>
+          <div class="totals-panel">
+            <div class="totals-heading">BILL SUMMARY <span>₹ INR</span></div>
+            <div class="total-line"><span>Subtotal</span><strong id="subtotal">₹0.00</strong></div>
+            <div class="total-line"><span>Total discount</span><strong id="discountTotal">− ₹0.00</strong></div>
+            <div class="total-line"><span>Tax / GST</span><strong id="taxDisplay">₹0.00</strong></div>
+            <div class="grand-total"><span>Grand total</span><strong id="grandTotal">₹0.00</strong></div>
+            <p class="amount-words" id="amountWords">Zero rupees only</p>
+          </div>
+        </div>
+
+        <footer class="receipt-footer">
+          <div class="footer-thanks"><span class="footer-check">✓</span><span><strong>Thank you for visiting.</strong><small>Please verify the medicines and bill before leaving.</small></span></div>
+          <div class="signature-area"><div class="signature-line"></div><span>Authorized signature</span></div>
+        </footer>
+      </section>
+      <p class="page-footnote no-print">Print tip: choose your printer or “Save as PDF” in the browser print dialog.</p>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
